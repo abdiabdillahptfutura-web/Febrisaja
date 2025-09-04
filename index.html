@@ -89,9 +89,7 @@
             transform: scale(1.05);
         }
 
-        /* --- PEMBARUAN DI SINI --- */
-
-        /* 1. Desain Baru untuk Tombol Navigasi Slider */
+        /* Desain Baru untuk Tombol Navigasi Slider */
         .swiper-button-next,
         .swiper-button-prev {
             background-color: rgba(31, 41, 55, 0.4); /* bg-gray-800 transparan */
@@ -117,7 +115,7 @@
             font-weight: 900;
         }
 
-        /* 2. Animasi Zoom (Ken Burns) untuk Foto Latar Belakang */
+        /* Animasi Zoom (Ken Burns) untuk Foto Latar Belakang */
         .slide-bg {
             position: absolute;
             top: 0;
@@ -130,9 +128,17 @@
             transition: transform 7s ease-out; 
         }
 
-        /* Saat slide aktif, mulai animasi zoom */
         .swiper-slide-active .slide-bg {
             transform: scale(1.1);
+        }
+        
+        /* --- PEMBARUAN BACKGROUND PROYEK DI SINI --- */
+        .project-bg {
+            /* Ganti URL di bawah ini dengan URL gambar Anda sendiri */
+            background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Ini yang menciptakan efek parallax */
         }
         /* --- AKHIR PEMBARUAN --- */
 
@@ -251,8 +257,11 @@
         </section>
 
         <!-- Bagian Proyek -->
-        <section id="proyek" class="py-20 bg-gray-800/50 overflow-hidden">
-            <div class="container mx-auto px-6">
+        <section id="proyek" class="py-20 overflow-hidden relative project-bg">
+            <!-- Overlay gelap untuk memastikan teks terbaca -->
+            <div class="absolute inset-0 bg-gray-900/90 z-0"></div>
+
+            <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-12" data-aos="fade-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-white">Proyek & Pengalaman</h2>
                     <p class="text-gray-400 mt-2">Beberapa kegiatan yang pernah saya tangani.</p>
@@ -319,7 +328,7 @@
     <!-- Footer -->
     <footer class="bg-gray-900 border-t border-gray-800 py-6">
         <div class="container mx-auto px-6 text-center text-gray-400">
-            <p>&copy; 2025 Febri. Dibuat dengan penuh semangat.</p>
+            <p>&copy; 2024 Febri. Dibuat dengan penuh semangat.</p>
         </div>
     </footer>
 
@@ -380,5 +389,4 @@
 
 </body>
 </html>
-
 
