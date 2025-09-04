@@ -25,7 +25,6 @@
             transition: all 0.3s ease;
         }
         .glassmorphism:hover {
-            /* Efek glow saat disentuh */
             box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
             border-color: rgba(6, 182, 212, 0.7);
         }
@@ -51,13 +50,11 @@
         .swiper-slide {
             text-align: center;
             font-size: 18px;
-            background: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-position: center;
-            background-size: cover;
             position: relative;
+            overflow: hidden; /* Penting untuk animasi zoom */
         }
         .slide-overlay {
             position: absolute;
@@ -65,14 +62,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Overlay lebih gelap untuk kontras teks */
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
         }
         .slide-content {
-            z-index: 10;
+            z-index: 2;
         }
         :root {
-            --swiper-navigation-color: #fff;
-            --swiper-pagination-color: #06b6d4; /* Warna cyan */
+            --swiper-pagination-color: #06b6d4;
         }
 
         /* Animasi baru untuk elemen yang bisa di-klik */
@@ -91,6 +88,54 @@
         .group:hover .zoom-image {
             transform: scale(1.05);
         }
+
+        /* --- PEMBARUAN DI SINI --- */
+
+        /* 1. Desain Baru untuk Tombol Navigasi Slider */
+        .swiper-button-next,
+        .swiper-button-prev {
+            background-color: rgba(31, 41, 55, 0.4); /* bg-gray-800 transparan */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background-color: rgba(6, 182, 212, 0.7); /* Efek hover warna cyan */
+            border-color: rgba(6, 182, 212, 1);
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        /* 2. Animasi Zoom (Ken Burns) untuk Foto Latar Belakang */
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+            /* Durasi transisi lebih lama dari autoplay untuk efek halus */
+            transition: transform 7s ease-out; 
+        }
+
+        /* Saat slide aktif, mulai animasi zoom */
+        .swiper-slide-active .slide-bg {
+            transform: scale(1.1);
+        }
+        /* --- AKHIR PEMBARUAN --- */
+
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200">
@@ -124,8 +169,10 @@
         <section id="beranda" class="overflow-hidden">
             <div class="swiper hero-slider">
                 <div class="swiper-wrapper">
-                    <!-- GANTI GAMBAR DI SINI (Slide 1) -->
-                    <div class="swiper-slide" style="background-image: url('2.png');" onerror="this.style.backgroundImage=`url('https://placehold.co/1920x1080/111827/FFFFFF?text=EV+Charger+di+Rumah')`">
+                    
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="slide-bg" style="background-image: url('2.png');" onerror="this.style.backgroundImage=`url('https://placehold.co/1920x1080/111827/FFFFFF?text=EV+Charger+di+Rumah')`"></div>
                         <div class="slide-overlay"></div>
                         <div class="slide-content text-center px-6 max-w-4xl">
                             <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4" data-aos="zoom-in-down">
@@ -136,8 +183,10 @@
                             </p>
                         </div>
                     </div>
-                    <!-- GANTI GAMBAR DI SINI (Slide 2) -->
-                    <div class="swiper-slide" style="background-image: url('3.png');" onerror="this.style.backgroundImage=`url('https://placehold.co/1920x1080/1F2937/FFFFFF?text=Instalasi+Profesional')`">
+                    
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="slide-bg" style="background-image: url('3.png');" onerror="this.style.backgroundImage=`url('https://placehold.co/1920x1080/1F2937/FFFFFF?text=Instalasi+Profesional')`"></div>
                         <div class="slide-overlay"></div>
                          <div class="slide-content text-center px-6 max-w-4xl">
                             <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">
@@ -148,8 +197,10 @@
                             </p>
                         </div>
                     </div>
-                    <!-- GANTI GAMBAR DI SINI (Slide 3) -->
-                    <div class="swiper-slide" style="background-image: url('1.png');" onerror="this.style.backgroundImage=`url('https://placehold.co/1920x1080/374151/FFFFFF?text=Masa+Depan+Mobilitas')`">
+
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <div class="slide-bg" style="background-image: url('1.png');" onerror="this.style.backgroundImage=`url('https://placehold.co/1920x1080/374151/FFFFFF?text=Masa+Depan+Mobilitas')`"></div>
                         <div class="slide-overlay"></div>
                          <div class="slide-content text-center px-6 max-w-4xl">
                             <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">
@@ -268,7 +319,7 @@
     <!-- Footer -->
     <footer class="bg-gray-900 border-t border-gray-800 py-6">
         <div class="container mx-auto px-6 text-center text-gray-400">
-            <p>&copy; 2025 Febri. Dibuat dengan penuh semangat.</p>
+            <p>&copy; 2024 Febri. Dibuat dengan penuh semangat.</p>
         </div>
     </footer>
 
@@ -281,6 +332,12 @@
         // Inisialisasi Slider Hero
         const swiper = new Swiper('.hero-slider', {
             loop: true,
+            grabCursor: true, // Menambahkan kursor 'grab'
+            speed: 1000, // Memperlambat transisi fade
+            effect: 'fade', // Menggunakan efek fade
+            fadeEffect: {
+                crossFade: true
+            },
             autoplay: {
                 delay: 5000,
                 disableOnInteraction: false,
@@ -323,6 +380,4 @@
 
 </body>
 </html>
-
-
 
